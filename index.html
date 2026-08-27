@@ -148,20 +148,20 @@
   position:sticky;top:0;z-index:50;
   display:flex;align-items:center;justify-content:space-between;gap:12px;
   padding:11px 12px;margin:0 -12px 14px;
-  background:rgba(255,255,255,.98);backdrop-filter:blur(9px);
-  border-bottom:1px solid var(--blue-line);box-shadow:0 3px 12px rgba(0,0,0,.08)
+  background:rgba(12,39,64,.96);backdrop-filter:blur(9px);
+  border-bottom:1px solid var(--blue-line);box-shadow:0 3px 12px rgba(0,0,0,.2)
 }
 .detail-heading{min-width:0}
 .interno-title{
-  color:#0c2740;font-size:24px;line-height:1.05;font-weight:900;
+  color:var(--amber);font-size:24px;line-height:1.05;font-weight:900;
   letter-spacing:.01em
 }
 .interno-progress{
-  color:#718394;font-size:12px;font-weight:650;margin-top:4px
+  color:var(--text-dim);font-size:12px;font-weight:650;margin-top:4px
 }
 .save-home-btn{
   flex:0 0 auto;border:0;border-radius:9px;padding:10px 13px;
-  background:#123457;color:#fff;font-weight:850;font-size:11px;
+  background:var(--amber);color:#241300;font-weight:850;font-size:11px;
   letter-spacing:.02em;cursor:pointer;white-space:nowrap
 }
 .save-home-btn:active{transform:scale(.98)}
@@ -192,8 +192,7 @@
 </header>
 
 <div class="toolbar" id="toolbar">
-  <button class="btn amber" onclick="openReport()">📊 Report</button>
-    <button class="btn amber" onclick="downloadShareReport()">📤 Condividi Report</button>
+  <button class="btn amber" onclick="downloadShareReport()">📤 Condividi Report</button>
   <button class="btn" onclick="exportJSON()">⬇ Esporta JSON</button>
   <button class="btn" onclick="exportCSV()">⬇ Esporta CSV</button>
   <button class="btn ghost" onclick="triggerImport()">⬆ Carica JSON</button>
