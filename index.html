@@ -145,14 +145,26 @@
   .note-input:focus{ outline:2px solid var(--amber); border-color:var(--amber); }
 
   .back-row{
-    display:flex; align-items:center; gap:10px; margin-bottom:4px;
-  }
-  .back-btn{
-    background:none; border:none; color:var(--paper);
-    font-size:22px; cursor:pointer; padding:4px 8px 4px 0;
-  }
-  .interno-title{ font-size:19px; font-weight:700; }
-  .interno-progress{ color:var(--text-dim); font-size:12.5px; }
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:11px 12px;margin:0 -12px 14px;
+  background:rgba(255,255,255,.98);backdrop-filter:blur(9px);
+  border-bottom:1px solid var(--blue-line);box-shadow:0 3px 12px rgba(0,0,0,.08)
+}
+.detail-heading{min-width:0}
+.interno-title{
+  color:#0c2740;font-size:24px;line-height:1.05;font-weight:900;
+  letter-spacing:.01em
+}
+.interno-progress{
+  color:#718394;font-size:12px;font-weight:650;margin-top:4px
+}
+.save-home-btn{
+  flex:0 0 auto;border:0;border-radius:9px;padding:10px 13px;
+  background:#123457;color:#fff;font-weight:850;font-size:11px;
+  letter-spacing:.02em;cursor:pointer;white-space:nowrap
+}
+.save-home-btn:active{transform:scale(.98)}
 
   #toast{
     position:fixed; bottom:18px; left:50%; transform:translateX(-50%) translateY(20px);
@@ -163,11 +175,15 @@
   #toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
 
   .hidden{ display:none !important; }
+  body.detail-mode #app-header{ display:none; }
+  body.detail-mode #toolbar{ display:none; }
+  body.detail-mode main{ padding-top:0; }
+
 </style>
 </head>
 <body>
 
-<header>
+<header id="app-header">
   <div class="header-row">
     <div class="eyebrow mono">CANTIERE EURORA LIVING</div>
     <div class="total-badge mono" id="total-badge">0%</div>
@@ -194,11 +210,11 @@
   <!-- VISTA DETTAGLIO -->
   <div id="view-detail" class="hidden">
     <div class="back-row">
-      <button class="back-btn" onclick="goHome()">←</button>
-      <div>
+      <div class="detail-heading">
         <div class="interno-title mono" id="detail-title"></div>
         <div class="interno-progress" id="detail-progress"></div>
       </div>
+      <button class="save-home-btn" onclick="goHome()">SALVA E TORNA ALLA HOME</button>
     </div>
     <div id="detail-content"></div>
   </div>
@@ -342,6 +358,7 @@
 
   // ---- RENDER DETTAGLIO --------------------------------------------------
   function openInterno(interno) {
+    document.body.classList.add('detail-mode');
     document.getElementById("view-home").classList.add("hidden");
     document.getElementById("view-detail").classList.remove("hidden");
     document.getElementById("toolbar").classList.add("hidden");
@@ -349,6 +366,7 @@
   }
 
   function goHome() {
+    document.body.classList.remove('detail-mode');
     document.getElementById("view-detail").classList.add("hidden");
     document.getElementById("view-home").classList.remove("hidden");
     document.getElementById("toolbar").classList.remove("hidden");
@@ -655,7 +673,14 @@
       .done-box{background:#edf8f1;color:#227d4f;padding:11px;border-radius:8px;font-weight:800;font-size:12px}
       details{border-top:1px solid #e8edf1;margin-top:14px;padding-top:9px}summary{cursor:pointer;color:#63798b;font-size:11px;font-weight:700}.completed{display:grid;grid-template-columns:1fr 1fr;gap:5px 18px;padding-top:9px;color:#718394;font-size:10px}
       .back{display:inline-block;margin-top:11px;color:#4e6b82;text-decoration:none;font-size:10px;font-weight:800}
-      @media(max-width:700px){.units-grid{grid-template-columns:repeat(2,1fr)}.building-grid{grid-template-columns:1fr}.hero-row{align-items:center}h1{font-size:23px}.hero-pct{font-size:38px}}
+      body.detail-mode .back-row{margin:0 -10px 14px;padding:10px}
+  body.detail-mode .interno-title{font-size:23px}
+  body.detail-mode .save-home-btn{font-size:9px;padding:9px 10px}
+  @media(max-width:700px){
+  .back-row{margin:0 -10px 14px;padding:9px 10px;gap:8px}
+  .save-home-btn{font-size:10px;padding:9px 10px}
+}
+@media(max-width:700px){.units-grid{grid-template-columns:repeat(2,1fr)}.building-grid{grid-template-columns:1fr}.hero-row{align-items:center}h1{font-size:23px}.hero-pct{font-size:38px}}
       @media print{.top{display:none}body{background:white}.wrap{max-width:none;padding:0}.hero{box-shadow:none}.detail{break-inside:avoid}.details{break-before:page}.unit{break-inside:avoid}}
     </style></head><body>
       <div class="top"></div>
